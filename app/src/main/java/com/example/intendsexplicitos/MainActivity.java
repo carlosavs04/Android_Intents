@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnIntent1, btnIntent2, btnIntent3, btnIntent4, btnIntent5;
     ImageView imagen;
     Uri ubicacion = Uri.parse("google.streetview:cbll=46.414382,10.013988");
-    String numeroTelefono = "+528713321257";
+    String numeroTelefono = "+528713321257", mail = "carlos.avalos@gmail.com", asunto = "Nuevo mensaje";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +69,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
-        if (view.getId() == R.id.btnIntent4)
-        {
-            startActivity(new Intent(this,mailto.class));
+        if (view.getId() == R.id.btnIntent4) {
+            Intent enviarCorreo = new Intent(Intent.ACTION_SEND);
+            enviarCorreo.setType("*/*");
+            enviarCorreo.putExtra(Intent.EXTRA_EMAIL, mail);
+            enviarCorreo.putExtra(Intent.EXTRA_SUBJECT, asunto);
+
+            if (enviarCorreo.resolveActivity(getPackageManager()) != null) {
+                startActivity(enviarCorreo);
+            }
         }
 
         if (view.getId() == R.id.btnIntent5)

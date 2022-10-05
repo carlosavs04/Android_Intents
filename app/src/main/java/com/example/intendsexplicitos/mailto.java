@@ -12,7 +12,7 @@ public class mailto extends AppCompatActivity implements View.OnClickListener {
 
     EditText correo, asunto;
     Button enviar;
-    String direccion, motivo;
+    String direccion = "carlos.avalos0409@gmail.com", motivo = "Prueba";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +22,6 @@ public class mailto extends AppCompatActivity implements View.OnClickListener {
         enviar = (Button) findViewById(R.id.enviar);
         correo = (EditText) findViewById(R.id.correo);
         asunto = (EditText) findViewById(R.id.asunto);
-        direccion = correo.getText().toString();
-        motivo = asunto.getText().toString();
-
         enviar.setOnClickListener(this);
     }
 
