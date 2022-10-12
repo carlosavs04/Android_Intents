@@ -44,8 +44,21 @@
         android:id="@+id/btnIntent5"
         />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mandar información"
+        android:id="@+id/btnIntent6"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Llamar permiso"
+        android:id="@+id/btnIntent7"
+        />
+
     <ImageView
         android:id="@+id/imagen"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="302dp" />
 </LinearLayout>

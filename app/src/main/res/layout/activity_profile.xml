@@ -4,57 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mailto"
+    tools:context=".profile"
     android:background="@color/base">
 
-    <EditText
-        android:id="@+id/nombre"
+    <TextView
+        android:id="@+id/bienvenido"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Ingresa tu nombre"
+        android:textSize="60dp"
+        android:textColor="@color/black"
+        android:text="Bienvenido"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.05"/>
+
+    <TextView
+        android:id="@+id/nom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text="null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bienvenido"
         app:layout_constraintVertical_bias="0.05"
         android:layout_margin="10dp"
         android:textSize="25dp"/>
 
-    <EditText
-        android:id="@+id/edad"
+    <TextView
+        android:id="@+id/ed"
+        android:text="null"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Ingresa tu edad"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nombre"
+        app:layout_constraintTop_toBottomOf="@id/nom"
         app:layout_constraintVertical_bias="0.05"
         android:layout_margin="10dp"
         android:textSize="25dp"/>
 
-    <EditText
-        android:id="@+id/correo"
+    <TextView
+        android:id="@+id/txtmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Ingresa tu correo electrónico"
+        android:text="null"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edad"
+        app:layout_constraintTop_toBottomOf="@id/ed"
         app:layout_constraintVertical_bias="0.05"
         android:layout_margin="10dp"
         android:textSize="25dp"/>
-
-    <Button
-        android:id="@+id/enviar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Enviar correo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/correo" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

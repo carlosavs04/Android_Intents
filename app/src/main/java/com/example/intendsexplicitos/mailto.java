@@ -10,9 +10,9 @@ import android.widget.EditText;
 
 public class mailto extends AppCompatActivity implements View.OnClickListener {
 
-    EditText correo, asunto;
+    EditText nombre, edad, correo;
     Button enviar;
-    String direccion = "carlos.avalos0409@gmail.com", motivo = "Prueba";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,23 +21,26 @@ public class mailto extends AppCompatActivity implements View.OnClickListener {
 
         enviar = (Button) findViewById(R.id.enviar);
         correo = (EditText) findViewById(R.id.correo);
-        asunto = (EditText) findViewById(R.id.asunto);
+        nombre = (EditText) findViewById(R.id.nombre);
+        edad = (EditText) findViewById(R.id.edad);
+
         enviar.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
 
-        if(view.getId() == R.id.enviar){
-            Intent enviarCorreo = new Intent(Intent.ACTION_SEND);
-            enviarCorreo.setType("*/*");
-            enviarCorreo.putExtra(Intent.EXTRA_EMAIL, direccion);
-            enviarCorreo.putExtra(Intent.EXTRA_SUBJECT, motivo);
+        if (view.getId() == R.id.enviar) {
+            String name = nombre.getText().toString();
+            String age = edad.getText().toString();
+            String mail = correo.getText().toString();
 
-            if(enviarCorreo.resolveActivity(getPackageManager()) != null) {
-                startActivity(enviarCorreo);
-            }
+            Intent enviarDatos = new Intent(this, profile.class);
+            enviarDatos.putExtra("enviarNombre", name);
+            enviarDatos.putExtra("enviarEdad", age);
+            enviarDatos.putExtra("enviarCorreo", mail);
+            startActivity(enviarDatos);
         }
-
     }
 }
+

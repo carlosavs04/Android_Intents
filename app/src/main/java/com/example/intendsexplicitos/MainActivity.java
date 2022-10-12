@@ -1,11 +1,18 @@
 package com.example.intendsexplicitos;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -17,7 +24,7 @@ import java.net.URI;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     String url = "https://www.google.com.mx/?hl=es-419";
-    Button btnIntent1, btnIntent2, btnIntent3, btnIntent4, btnIntent5;
+    Button btnIntent1, btnIntent2, btnIntent3, btnIntent4, btnIntent5, btnIntent6, btnIntent7;
     ImageView imagen;
     Uri ubicacion = Uri.parse("google.streetview:cbll=46.414382,10.013988");
     String numeroTelefono = "+528713321257", mail = "carlos.avalos@gmail.com", asunto = "Nuevo mensaje";
@@ -32,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnIntent3 = (Button) findViewById(R.id.btnIntent3);
         btnIntent4 = (Button) findViewById(R.id.btnIntent4);
         btnIntent5 = (Button) findViewById(R.id.btnIntent5);
+        btnIntent6 = (Button) findViewById(R.id.btnIntent6);
+        btnIntent7 = (Button) findViewById(R.id.btnIntent7);
         imagen = (ImageView) findViewById(R.id.imagen);
 
         btnIntent1.setOnClickListener(this);
@@ -39,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnIntent3.setOnClickListener(this);
         btnIntent4.setOnClickListener(this);
         btnIntent5.setOnClickListener(this);
+        btnIntent6.setOnClickListener(this);
+        btnIntent7.setOnClickListener(this);
     }
 
     @Override
@@ -90,6 +101,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(llamar);
             }
         }
+
+        if(view.getId() == R.id.btnIntent6)
+        {
+            startActivity(new Intent(this,mailto.class));
+        }
+
+        if(view.getId() == R.id.btnIntent7)
+        {
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            {
+                if(ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED)
+                {
+                    llamar();
+                }
+
+                else
+                {
+                    ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CALL_PHONE }, 1);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch(requestCode)
+        {
+            case 1:
+                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                {
+                    llamar();
+                }
+
+                else {
+                    System.out.println("No se tienen los permisos necesarios para realizar esta acción.");
+                }
+
+                return;
+        }
     }
 
     @Override
@@ -98,5 +150,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Bitmap nuevaFoto = data.getParcelableExtra("data");
         imagen.setImageBitmap(nuevaFoto);
+    }
+
+    public void llamar()
+    {
+        Intent llamada = new Intent(Intent.ACTION_CALL);
+        llamada.setData(Uri.parse("tel:" + numeroTelefono));
+        startActivity(llamada);
     }
 }
